@@ -1,0 +1,44 @@
+<nav class="navbar navbar-dark bg-dark px-4 shadow">
+  <a class="navbar-brand fw-bold" href="#">Inspectoría Central - Panel de Control</a>
+  <button class="btn btn-outline-light btn-sm" routerLink="/">Cerrar Sesión</button>
+</nav>
+
+<div class="container mt-5">
+  <div class="row mb-4">
+    <div class="col">
+      <h2 class="text-secondary border-bottom pb-2">Módulos de Gestión</h2>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card h-100 border-primary shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Gestión de Alumnos (Matías)</h5>
+          <p class="card-text text-muted">Módulo encargado del registro y modificación de los datos de la comunidad escolar.</p>
+          <button routerLink="/crud-personas" class="btn btn-primary mt-2">Acceder al Módulo</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 border-success shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-success">Gestión de Protocolos (Franco)</h5>
+          <p class="card-text text-muted">Módulo para administrar el registro, estado e historial de los 17 protocolos de acción.</p>
+          <button class="btn btn-success mt-2 disabled">Acceder al Módulo</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 bg-light shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-dark">Reportes Consolidados</h5>
+          <p class="card-text text-muted">Funcionalidad grupal: Emisión de informes estadísticos sobre la convivencia escolar.</p>
+          <button class="btn btn-dark mt-2 disabled">Acceder a Reportes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

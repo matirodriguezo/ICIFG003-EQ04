@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    build:
+      context: ./postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: demo01
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  demo02:
+    image: franc029/demo02:latest
+    container_name: demo02
+    build:
+      context: ./demo02
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/demo01
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+    ports:
+      - "8884:8884"
+    depends_on:
+      - postgres
+
+  demo03:
+    image: franc029/demo03:latest
+    container_name: demo03
+    build:
+      context: ./demo03
+    ports:
+      - "9994:9994"
+    depends_on:
+      - postgres
+
+volumes:
+  pg-data:
