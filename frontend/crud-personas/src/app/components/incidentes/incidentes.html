@@ -1,0 +1,121 @@
+<nav class="navbar navbar-dark bg-dark px-4 shadow-sm mb-4 border-bottom border-3 border-danger">
+  <div class="d-flex align-items-center">
+    <button class="btn btn-outline-light btn-sm me-3 px-3 rounded-pill shadow-sm" routerLink="/menu">
+      &larr; Volver al Menú
+    </button>
+    <span class="navbar-brand fw-bold mb-0 text-uppercase tracking-wider">Registro y Activación de Casos</span>
+  </div>
+</nav>
+
+<div class="container-fluid px-4 pb-5">
+  <div class="row g-4">
+    
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0 rounded-4 border-start border-5 border-danger">
+        <div class="card-header bg-white pt-4 pb-2 border-0">
+          <h5 class="fw-bold text-dark mb-0">Nueva Acta de Incidente</h5>
+          <p class="text-muted small">Complete los datos para activar la normativa.</p>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="guardarIncidente()">
+            
+            <div class="mb-3 p-3 bg-light border rounded-3 shadow-sm">
+              <label class="form-label small fw-bold text-dark mb-2">1. Localizar Alumno (Nombre o Curso)</label>
+              <input type="text" class="form-control mb-2 border-0 shadow-sm py-2" 
+                     placeholder="🔍 Escriba para filtrar..." 
+                     [(ngModel)]="textoBusqueda" name="filtroBusqueda">
+              
+              <select class="form-select border-0 shadow-sm text-primary fw-bold" 
+                      [(ngModel)]="nuevoIncidente.alumnoId" name="alumno" required>
+                <option value="0" disabled selected>-- Seleccione del resultado --</option>
+                <option *ngFor="let a of alumnosFiltrados" [value]="a.id">
+                  {{a.curso}} | {{a.nombre}} {{a.apellido}}
+                </option>
+              </select>
+              <div *ngIf="alumnosFiltrados.length === 0" class="text-danger small mt-1 ps-1">
+                No hay coincidencias.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-muted">2. Protocolo a Aplicar</label>
+              <select class="form-select bg-light border-0 shadow-sm" [(ngModel)]="nuevoIncidente.protocoloId" name="protocolo" required>
+                <option value="0" disabled>-- Seleccione protocolo activo --</option>
+                <option *ngFor="let p of protocolosActivos" [value]="p.id">{{p.nombreProtocolo}}</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-muted">3. Fecha del Incidente</label>
+              <input type="date" class="form-control bg-light border-0 shadow-sm" [(ngModel)]="nuevoIncidente.fecha" name="fecha" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-muted">4. Relato y Observaciones</label>
+              <textarea class="form-control bg-light border-0 shadow-sm" rows="3" 
+                        [(ngModel)]="nuevoIncidente.descripcionEvento" name="desc" 
+                        placeholder="Describa el hecho ocurrido..." required></textarea>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label small fw-bold text-muted">5. Funcionario a Cargo</label>
+              <input type="text" class="form-control bg-light border-0 shadow-sm" 
+                     [(ngModel)]="nuevoIncidente.responsable" name="resp" 
+                     placeholder="Nombre del Inspector/Docente" required>
+            </div>
+
+            <button type="submit" class="btn btn-danger w-100 fw-bold py-2 shadow-sm rounded-pill">
+              <i class="bi bi-check-circle-fill me-2"></i> Registrar Incidente
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-white pt-4 pb-2 border-0">
+          <h5 class="text-dark fw-bold mb-0">Historial General de Activaciones</h5>
+        </div>
+        <div class="card-body p-0 mt-2">
+          <div class="table-responsive" style="max-height: 75vh; overflow-y: auto;">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light sticky-top">
+                <tr>
+                  <th class="ps-4">Fecha</th>
+                  <th>Alumno / Curso</th>
+                  <th width="30%">Protocolo Aplicado</th>
+                  <th>Responsable</th>
+                  <th class="pe-4">Relato</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let inc of incidentes">
+                  <td class="ps-4 fw-bold text-danger">{{inc.fecha}}</td>
+                  <td class="fw-bold text-dark">
+                    {{getNombreAlumno(inc.alumnoId)}}
+                  </td>
+                  <td class="small fw-semibold text-secondary">
+                    {{getNombreProtocolo(inc.protocoloId)}}
+                  </td>
+                  <td class="text-muted small">
+                    <i class="bi bi-person-badge me-1"></i> {{inc.responsable}}
+                  </td>
+                  <td class="small text-muted pe-4">
+                    {{inc.descripcionEvento}}
+                  </td>
+                </tr>
+                <tr *ngIf="incidentes.length === 0">
+                  <td colspan="5" class="text-center py-5 text-muted fst-italic">
+                    No se registran incidentes en la base de datos.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

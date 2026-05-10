@@ -1,1 +1,23 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+body {
+  background-color: #f8f9fa; /* Fondo gris muy suave para resaltar el blanco */
+}
+.card {
+  transition: all 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+}
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.2s;
+}
+.form-control, .form-select {
+  border-radius: 8px;
+  border-color: #dee2e6;
+}
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}

@@ -1,44 +1,50 @@
-<nav class="navbar navbar-dark bg-dark px-4 shadow">
-  <a class="navbar-brand fw-bold" href="#">Inspectoría Central - Panel de Control</a>
-  <button class="btn btn-outline-light btn-sm" routerLink="/">Cerrar Sesión</button>
+<nav class="navbar navbar-dark bg-dark px-4 shadow-sm mb-5 border-bottom border-3 border-primary">
+  <span class="navbar-brand fw-bold tracking-wide">Inspectoría Central</span>
+  <button class="btn btn-danger btn-sm px-3 rounded-pill shadow-sm" routerLink="/login">Cerrar Sesión</button>
 </nav>
 
-<div class="container mt-5">
-  <div class="row mb-4">
-    <div class="col">
-      <h2 class="text-secondary border-bottom pb-2">Módulos de Gestión</h2>
+<div class="container pb-5">
+  <div class="row mb-5 justify-content-center">
+    <div class="col-md-8 text-center">
+      <h2 class="fw-bold text-dark">Panel de Control</h2>
+      <p class="text-muted">Seleccione el módulo de trabajo que desea operar.</p>
     </div>
   </div>
 
-  <div class="row g-4">
+  <div class="row g-4 justify-content-center">
+    
     <div class="col-md-4">
-      <div class="card h-100 border-primary shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title text-primary">Gestión de Alumnos (Matías)</h5>
-          <p class="card-text text-muted">Módulo encargado del registro y modificación de los datos de la comunidad escolar.</p>
-          <button routerLink="/crud-personas" class="btn btn-primary mt-2">Acceder al Módulo</button>
+      <div class="card h-100 shadow-sm border-0 rounded-4 p-2 card-hover">
+        <div class="card-body text-center">
+          <div class="display-3 mb-3 text-primary">👨‍🎓</div>
+          <h5 class="fw-bold text-dark">Gestión de Alumnos</h5>
+          <p class="text-muted small mb-4">Administración de la base de datos de estudiantes y matrículas.</p>
+          <button routerLink="/personas" class="btn btn-primary w-100 shadow-sm">Abrir Módulo</button>
         </div>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card h-100 border-success shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title text-success">Gestión de Protocolos (Franco)</h5>
-          <p class="card-text text-muted">Módulo para administrar el registro, estado e historial de los 17 protocolos de acción.</p>
-          <button class="btn btn-success mt-2 disabled">Acceder al Módulo</button>
+      <div class="card h-100 shadow-sm border-0 rounded-4 p-2 card-hover">
+        <div class="card-body text-center">
+          <div class="display-3 mb-3 text-secondary">📋</div>
+          <h5 class="fw-bold text-dark">Catálogo Normativo</h5>
+          <p class="text-muted small mb-4">Mantenimiento y actualización de los protocolos oficiales.</p>
+          <button routerLink="/protocolos" class="btn btn-dark w-100 shadow-sm">Abrir Módulo</button>
         </div>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card h-100 bg-light shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title text-dark">Reportes Consolidados</h5>
-          <p class="card-text text-muted">Funcionalidad grupal: Emisión de informes estadísticos sobre la convivencia escolar.</p>
-          <button class="btn btn-dark mt-2 disabled">Acceder a Reportes</button>
+      <div class="card h-100 shadow-sm border-0 rounded-4 p-2 card-hover">
+        <div class="card-body text-center">
+          <div class="display-3 mb-3 text-danger">🚨</div>
+          <h5 class="fw-bold text-dark">Registro de Casos</h5>
+          <p class="text-muted small mb-4">Módulo de cruce para registrar incidentes y activar protocolos.</p>
+          <button routerLink="/incidentes" class="btn btn-danger w-100 shadow-sm">Abrir Módulo</button>
         </div>
       </div>
     </div>
+
   </div>
 </div>

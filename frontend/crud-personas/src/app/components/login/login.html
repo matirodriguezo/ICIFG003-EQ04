@@ -1,42 +1,36 @@
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh">
-  <div class="card shadow-sm border-0" style="width: 100%; max-width: 400px">
+  <div class="card shadow-lg border-0 rounded-4" style="width: 100%; max-width: 420px; overflow: hidden;">
+    
+    <div class="bg-primary" style="height: 6px;"></div>
+    
     <div class="card-body p-5">
-      <a routerLink="/" class="text-decoration-none text-muted mb-4 d-block">
-        &larr; Volver al inicio
-      </a>
+      <div class="text-center mb-4">
+        <h2 class="fw-bold text-dark mb-1">Colegio Marcela Paz</h2>
+        <p class="text-muted small">Plataforma Integrada de Inspectoría</p>
+      </div>
 
-      <h3 class="card-title text-center text-primary fw-bold mb-4">Iniciar Sesión</h3>
-      <div *ngIf="mensajeError" class="alert alert-danger py-2 mb-3 text-center small" role="alert">
-        {{ mensajeError }}
+      <div *ngIf="mensajeError" class="alert alert-danger py-2 mb-4 text-center small rounded-3 border-0 bg-danger text-white" role="alert">
+        <i class="bi bi-exclamation-circle me-1"></i> {{ mensajeError }}
       </div>
 
       <form>
         <div class="mb-3">
-          <label for="emailInput" class="form-label text-muted">Correo Institucional</label>
-          <input
-            type="email"
-            class="form-control form-control-lg"
-            id="emailInput"
-            name="correo"
-            [(ngModel)]="correo"
-            placeholder="nombre@colegio.cl"
-          />
+          <label class="form-label text-muted small fw-bold">Correo Institucional</label>
+          <input type="email" class="form-control form-control-lg bg-light" name="correo" [(ngModel)]="correo" placeholder="inspector@colegio.cl" />
         </div>
 
         <div class="mb-4">
-          <label for="passwordInput" class="form-label text-muted">Contraseña</label>
-          <input
-            type="password"
-            class="form-control form-control-lg"
-            id="passwordInput"
-            name="contrasena"
-            [(ngModel)]="contrasena"
-            placeholder="********"
-          />
+          <label class="form-label text-muted small fw-bold">Contraseña</label>
+          <input type="password" class="form-control form-control-lg bg-light" name="contrasena" [(ngModel)]="contrasena" placeholder="••••••••" />
         </div>
-        <button type="button" class="btn btn-primary btn-lg w-100" (click)="iniciarSesion()">
-          Ingresar al Sistema de Protocolos
+
+        <button type="button" class="btn btn-primary btn-lg w-100 mb-3 shadow-sm" (click)="iniciarSesion()">
+          Ingresar al Sistema
         </button>
+        
+        <a routerLink="/" class="text-decoration-none text-muted small d-block text-center">
+          &larr; Volver a la Landing Page
+        </a>
       </form>
     </div>
   </div>

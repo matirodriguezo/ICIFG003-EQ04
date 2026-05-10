@@ -1,86 +1,88 @@
-<nav class="navbar navbar-dark bg-primary px-4 shadow-sm mb-4">
-  <span class="navbar-brand fw-bold">Módulo: Gestión de Alumnos</span>
-  <button class="btn btn-light btn-sm" routerLink="/menu">Volver al Menú</button>
+<nav class="navbar navbar-dark bg-dark px-4 shadow-sm mb-4 border-bottom border-3 border-primary">
+  <div class="d-flex align-items-center">
+    <button class="btn btn-outline-light btn-sm me-3 px-3 rounded-pill" routerLink="/menu">&larr; Volver</button>
+    <span class="navbar-brand fw-bold mb-0">Módulo Estudiantil</span>
+  </div>
 </nav>
 
-<div class="container-fluid px-4">
+<div class="container-fluid px-4 pb-5">
   <div class="row g-4">
     
-    <div class="col-md-4">
-      <div class="card shadow-sm border-0">
-        <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
-          <h5 class="text-primary fw-bold">{{ persona.id === 0 ? 'Nuevo Registro' : 'Editar Registro' }}</h5>
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0 rounded-4 border-start border-5 border-primary">
+        <div class="card-header bg-white pt-4 pb-2 border-0">
+          <h5 class="fw-bold text-dark mb-0">Registro de Alumno</h5>
         </div>
         <div class="card-body">
           <form (ngSubmit)="guardar()">
-            
             <div class="mb-3">
-              <label class="form-label text-muted small">RUT</label>
-              <input type="text" class="form-control" [(ngModel)]="persona.rut" name="rut" placeholder="Ej: 20.111.111-1" required>
+              <label class="form-label small fw-bold text-muted">RUT</label>
+              <input type="text" class="form-control bg-light border-0" [(ngModel)]="persona.rut" name="rut" placeholder="Ej: 12.345.678-9" required>
             </div>
-
             <div class="mb-3">
-              <label class="form-label text-muted small">Nombre</label>
-              <input type="text" class="form-control" [(ngModel)]="persona.nombre" name="nombre" placeholder="Nombre del alumno" required>
+              <label class="form-label small fw-bold text-muted">Nombres</label>
+              <input type="text" class="form-control bg-light border-0" [(ngModel)]="persona.nombre" name="nombre" required>
             </div>
-
             <div class="mb-3">
-              <label class="form-label text-muted small">Apellido</label>
-              <input type="text" class="form-control" [(ngModel)]="persona.apellido" name="apellido" placeholder="Apellido paterno/materno" required>
+              <label class="form-label small fw-bold text-muted">Apellidos</label>
+              <input type="text" class="form-control bg-light border-0" [(ngModel)]="persona.apellido" name="apellido" required>
             </div>
-
             <div class="mb-4">
-              <label class="form-label text-muted small">Curso</label>
-              <select class="form-select" [(ngModel)]="persona.curso" name="curso" required>
-                <option value="" disabled selected>Seleccione un curso...</option>
-                <option value="7°A">7° Básico A</option>
-                <option value="7°B">7° Básico B</option>
-                <option value="8°A">8° Básico A</option>
-                <option value="8°B">8° Básico B</option>
-                <option value="1°M">1° Medio</option>
-                <option value="2°M">2° Medio</option>
+              <label class="form-label small fw-bold text-muted">Curso / Nivel</label>
+              <select class="form-select bg-light border-0 shadow-sm text-primary fw-bold" [(ngModel)]="persona.curso" name="curso" required>
+                <option value="" disabled selected>-- Seleccione el curso --</option>
+                <option *ngFor="let c of listaCursos" [value]="c">{{c}}</option>
               </select>
             </div>
-
             <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-primary">{{ persona.id === 0 ? 'Guardar Alumno' : 'Actualizar Datos' }}</button>
-              <button type="button" class="btn btn-outline-secondary" (click)="limpiar()" *ngIf="persona.id !== 0">Cancelar Edición</button>
+              <button type="submit" class="btn btn-primary py-2 shadow-sm fw-bold">
+                {{ persona.id === 0 ? 'Registrar en Sistema' : 'Guardar Cambios' }}
+              </button>
+              <button type="button" class="btn btn-link text-muted btn-sm" (click)="limpiar()" *ngIf="persona.id !== 0">
+                Cancelar edición
+              </button>
             </div>
-
           </form>
         </div>
       </div>
     </div>
 
-    <div class="col-md-8">
-      <div class="card shadow-sm border-0">
-        <div class="card-body p-0">
-          <div class="table-responsive">
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-white pt-4 pb-2 border-0">
+          <h5 class="fw-bold text-dark mb-0">Listado de Estudiantes Registrados</h5>
+        </div>
+        <div class="card-body p-0 mt-2">
+          <div class="table-responsive" style="max-height: 70vh; overflow-y: auto;">
             <table class="table table-hover align-middle mb-0">
-              <thead class="table-light">
+              <thead class="table-light sticky-top">
                 <tr>
-                  <th scope="col" class="ps-4">ID</th>
-                  <th scope="col">RUT</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Apellido</th>
-                  <th scope="col">Curso</th>
-                  <th scope="col" class="text-end pe-4">Acciones</th>
+                  <th class="ps-4">RUT</th>
+                  <th>Nombre Completo</th>
+                  <th>Curso</th>
+                  <th class="text-end pe-4">Gestión</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let p of personas">
-                  <td class="ps-4 text-muted fw-bold">#{{p.id}}</td>
-                  <td>{{p.rut}}</td>
-                  <td>{{p.nombre}}</td>
-                  <td>{{p.apellido}}</td>
-                  <td><span class="badge bg-secondary">{{p.curso}}</span></td>
+                  <td class="ps-4 text-muted small fw-bold">{{p.rut}}</td>
+                  <td class="fw-semibold">{{p.nombre}} {{p.apellido}}</td>
+                  <td>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 rounded-pill">
+                      {{p.curso}}
+                    </span>
+                  </td>
                   <td class="text-end pe-4">
-                    <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(p)">Editar</button>
-                    <button class="btn btn-sm btn-outline-danger" (click)="eliminar(p.id)">Eliminar</button>
+                    <button class="btn btn-sm btn-white border shadow-sm me-2 text-primary" (click)="editar(p)" title="Editar">
+                      <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button class="btn btn-sm btn-white border shadow-sm text-danger" (click)="eliminar(p.id)" title="Eliminar">
+                      <i class="bi bi-trash3-fill"></i>
+                    </button>
                   </td>
                 </tr>
                 <tr *ngIf="personas.length === 0">
-                  <td colspan="6" class="text-center text-muted py-4">No hay alumnos registrados en el sistema.</td>
+                  <td colspan="4" class="text-center py-5 text-muted small">No hay alumnos registrados en la base de datos.</td>
                 </tr>
               </tbody>
             </table>
@@ -88,6 +90,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
