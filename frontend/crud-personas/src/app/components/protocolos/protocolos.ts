@@ -9,7 +9,8 @@ import { Protocolo } from '../../models/protocolo';
   selector: 'app-protocolos',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './protocolos.html'
+  templateUrl: './protocolos.html',
+  styleUrl: './protocolos.css' // <-- LÍNEA AÑADIDA (Con su respectiva coma arriba)
 })
 export class ProtocolosComponent implements OnInit {
   protocolos: Protocolo[] = [];

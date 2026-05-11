@@ -5,4 +5,6 @@ export interface Incidente {
     fecha: string;
     descripcionEvento: string;
     responsable: string;
+    estado?: string;             // Nuevo
+    motivoModificacion?: string; // Nuevo
 }

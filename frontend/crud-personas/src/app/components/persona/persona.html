@@ -1,7 +1,11 @@
 <nav class="navbar navbar-dark bg-dark px-4 shadow-sm mb-4 border-bottom border-3 border-primary">
-  <div class="d-flex align-items-center">
-    <button class="btn btn-outline-light btn-sm me-3 px-3 rounded-pill" routerLink="/menu">&larr; Volver</button>
-    <span class="navbar-brand fw-bold mb-0">Módulo Estudiantil</span>
+  <div class="d-flex align-items-center w-100">
+    <button class="btn btn-outline-light btn-sm me-3 px-3 rounded-pill transition-all" routerLink="/menu">
+      <i class="bi bi-arrow-left-circle me-1"></i> Volver al Menú
+    </button>
+    <span class="navbar-brand fw-bold mb-0 tracking-wide">
+      <i class="bi bi-person-lines-fill me-2 text-primary"></i> Módulo Estudiantil
+    </span>
   </div>
 </nav>
 
@@ -9,37 +13,68 @@
   <div class="row g-4">
     
     <div class="col-lg-4">
-      <div class="card shadow-sm border-0 rounded-4 border-start border-5 border-primary">
+      <div class="card shadow-sm border-0 rounded-4 custom-card">
         <div class="card-header bg-white pt-4 pb-2 border-0">
-          <h5 class="fw-bold text-dark mb-0">Registro de Alumno</h5>
+          <h5 class="fw-bold text-dark mb-0">
+            <i class="bi" [ngClass]="persona.id === 0 ? 'bi-person-plus-fill text-primary' : 'bi-person-gear text-warning'"></i> 
+            {{ persona.id === 0 ? 'Registro de Alumno' : 'Edición de Alumno' }}
+          </h5>
+          <p class="text-muted small mt-1">Complete o actualice los datos del estudiante.</p>
         </div>
         <div class="card-body">
           <form (ngSubmit)="guardar()">
+            
             <div class="mb-3">
-              <label class="form-label small fw-bold text-muted">RUT</label>
-              <input type="text" class="form-control bg-light border-0" [(ngModel)]="persona.rut" name="rut" placeholder="Ej: 12.345.678-9" required>
+              <label class="form-label small fw-bold text-secondary">RUT</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text bg-light border-0 text-muted"><i class="bi bi-upc-scan"></i></span>
+                <input type="text" class="form-control bg-light border-0 custom-input" [(ngModel)]="persona.rut" name="rut" placeholder="Ej: 12.345.678-9" required>
+              </div>
             </div>
+
             <div class="mb-3">
-              <label class="form-label small fw-bold text-muted">Nombres</label>
-              <input type="text" class="form-control bg-light border-0" [(ngModel)]="persona.nombre" name="nombre" required>
+              <label class="form-label small fw-bold text-secondary">Nombres</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text bg-light border-0 text-muted"><i class="bi bi-person-badge"></i></span>
+                <input type="text" class="form-control bg-light border-0 custom-input" [(ngModel)]="persona.nombre" name="nombre" required>
+              </div>
             </div>
+
             <div class="mb-3">
-              <label class="form-label small fw-bold text-muted">Apellidos</label>
-              <input type="text" class="form-control bg-light border-0" [(ngModel)]="persona.apellido" name="apellido" required>
+              <label class="form-label small fw-bold text-secondary">Apellidos</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text bg-light border-0 text-muted"><i class="bi bi-person-badge-fill"></i></span>
+                <input type="text" class="form-control bg-light border-0 custom-input" [(ngModel)]="persona.apellido" name="apellido" required>
+              </div>
             </div>
-            <div class="mb-4">
-              <label class="form-label small fw-bold text-muted">Curso / Nivel</label>
-              <select class="form-select bg-light border-0 shadow-sm text-primary fw-bold" [(ngModel)]="persona.curso" name="curso" required>
-                <option value="" disabled selected>-- Seleccione el curso --</option>
-                <option *ngFor="let c of listaCursos" [value]="c">{{c}}</option>
-              </select>
+            
+            <div class="row mb-4">
+              <div class="col-8">
+                <label class="form-label small fw-bold text-secondary">Nivel / Grado</label>
+                <div class="input-group shadow-sm">
+                  <span class="input-group-text bg-light border-0 text-muted"><i class="bi bi-mortarboard"></i></span>
+                  <select class="form-select bg-light border-0 custom-input text-primary fw-bold" [(ngModel)]="nivelTemp" name="nivel" required>
+                    <option value="" disabled selected>-- Nivel --</option>
+                    <option *ngFor="let c of listaCursos" [value]="c">{{c}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-4">
+                <label class="form-label small fw-bold text-secondary">Letra</label>
+                <select class="form-select bg-light border-0 shadow-sm custom-input text-primary fw-bold" [(ngModel)]="letraTemp" name="letra" required>
+                  <option value="" disabled selected>-</option>
+                  <option *ngFor="let l of listaLetras" [value]="l">{{l}}</option>
+                </select>
+              </div>
             </div>
-            <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-primary py-2 shadow-sm fw-bold">
-                {{ persona.id === 0 ? 'Registrar en Sistema' : 'Guardar Cambios' }}
+
+            <div class="d-grid gap-2 mt-4">
+              <button type="submit" class="btn rounded-pill py-2 fw-bold shadow-sm btn-hover-scale"
+                      [ngClass]="persona.id === 0 ? 'btn-primary' : 'btn-warning'">
+                <i class="bi bi-check2-circle me-1"></i> {{ persona.id === 0 ? 'Registrar en Sistema' : 'Guardar Cambios' }}
               </button>
-              <button type="button" class="btn btn-link text-muted btn-sm" (click)="limpiar()" *ngIf="persona.id !== 0">
-                Cancelar edición
+              <button type="button" class="btn btn-link text-muted btn-sm text-decoration-none mt-1" (click)="limpiar()" *ngIf="persona.id !== 0">
+                <i class="bi bi-x-circle me-1"></i> Cancelar edición
               </button>
             </div>
           </form>
@@ -48,41 +83,54 @@
     </div>
 
     <div class="col-lg-8">
-      <div class="card shadow-sm border-0 rounded-4">
-        <div class="card-header bg-white pt-4 pb-2 border-0">
-          <h5 class="fw-bold text-dark mb-0">Listado de Estudiantes Registrados</h5>
+      <div class="card shadow-sm border-0 rounded-4 custom-card-table">
+        <div class="card-header bg-white pt-4 pb-2 border-0 d-flex justify-content-between align-items-center">
+          <h5 class="fw-bold text-dark mb-0"><i class="bi bi-list-columns-reverse text-secondary me-2"></i> Listado de Matrículas Activas</h5>
+          <span class="badge bg-primary rounded-pill">{{personas.length}} Registros</span>
         </div>
         <div class="card-body p-0 mt-2">
           <div class="table-responsive" style="max-height: 70vh; overflow-y: auto;">
-            <table class="table table-hover align-middle mb-0">
-              <thead class="table-light sticky-top">
+            <table class="table table-hover align-middle mb-0 custom-table">
+              <thead class="table-light sticky-top shadow-sm">
                 <tr>
-                  <th class="ps-4">RUT</th>
-                  <th>Nombre Completo</th>
-                  <th>Curso</th>
-                  <th class="text-end pe-4">Gestión</th>
+                  <th class="ps-4 text-secondary fw-bold">RUT</th>
+                  <th class="text-secondary fw-bold">Nombre Completo</th>
+                  <th class="text-secondary fw-bold">Curso Asignado</th>
+                  <th class="text-end pe-4 text-secondary fw-bold">Gestión</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let p of personas">
-                  <td class="ps-4 text-muted small fw-bold">{{p.rut}}</td>
-                  <td class="fw-semibold">{{p.nombre}} {{p.apellido}}</td>
+                <tr *ngFor="let p of personas" class="table-row-hover">
+                  <td class="ps-4 text-muted small fw-bold font-monospace">{{p.rut}}</td>
+                  <td class="fw-semibold text-dark">
+                    <div class="d-flex align-items-center">
+                      <div class="bg-light rounded-circle p-2 me-2 text-primary d-none d-md-block">
+                        <i class="bi bi-person"></i>
+                      </div>
+                      {{p.nombre}} {{p.apellido}}
+                    </div>
+                  </td>
                   <td>
-                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 rounded-pill">
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-bold">
                       {{p.curso}}
                     </span>
                   </td>
                   <td class="text-end pe-4">
-                    <button class="btn btn-sm btn-white border shadow-sm me-2 text-primary" (click)="editar(p)" title="Editar">
-                      <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-sm btn-white border shadow-sm text-danger" (click)="eliminar(p.id)" title="Eliminar">
-                      <i class="bi bi-trash3-fill"></i>
-                    </button>
+                    <div class="btn-group shadow-sm rounded-pill">
+                      <button class="btn btn-light action-btn text-warning border-0" (click)="editar(p)" title="Editar Perfil">
+                        <i class="bi bi-pencil-fill"></i>
+                      </button>
+                      <button class="btn btn-light action-btn text-danger border-0" (click)="eliminar(p.id)" title="Eliminar Registro">
+                        <i class="bi bi-trash3-fill"></i>
+                      </button>
+                    </div>
                   </td>
                 </tr>
                 <tr *ngIf="personas.length === 0">
-                  <td colspan="4" class="text-center py-5 text-muted small">No hay alumnos registrados en la base de datos.</td>
+                  <td colspan="4" class="text-center py-5">
+                    <div class="text-muted mb-2"><i class="bi bi-inbox display-4"></i></div>
+                    <p class="text-muted small mb-0">No hay alumnos registrados en la base de datos.</p>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -90,5 +138,6 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>

@@ -1,43 +1,45 @@
 /* --- BARRA DE NAVEGACIÓN --- */
-.navbar {
-  border-bottom: 1px solid rgba(0,0,0,0.05); /* Separador sutil */
+.tracking-wide { 
+  letter-spacing: 0.5px; 
 }
-.navbar-brand-text {
-  color: #2F428D; 
-  font-style: italic;
-  letter-spacing: -0.5px; /* Le da un toque más moderno a la fuente */
+.nav-hover { 
+  transition: color 0.3s ease; 
 }
-.nav-link-custom {
-  color: #4A4E5A;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-.nav-link-custom:hover {
-  color: #2F428D;
-}
-.nav-link-orange {
-  color: #E8834E !important; 
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0.5rem 1rem !important;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-.nav-link-orange:hover {
-  background-color: rgba(232, 131, 78, 0.1); /* Efecto botón al pasar el mouse */
+.nav-hover:hover { 
+  color: #0d6efd !important; 
 }
 
-/* --- SECCIÓN HERO (IMAGEN Y CUADRO) --- */
+/* Animación del botón Iniciar Sesión */
+.btn-login {
+  transition: all 0.3s ease;
+}
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(13, 110, 253, 0.25) !important;
+}
+
+/* --- SECCIÓN HERO --- */
 .hero-section {
   position: relative;
-  /* CAMBIO CLAVE: Gradiente de izquierda (90% oscuro) a derecha (20% oscuro) */
+  /* Degradado para que el texto blanco siempre se lea bien sobre la foto */
   background-image: linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.2) 100%), url('/assets/colegio.jpg'); 
   background-size: cover;
   background-position: center;
-  height: 75vh; /* Aumentado ligeramente para dar más aire */
+  height: 70vh;
   min-height: 550px;
   display: flex;
   align-items: center;
+}
+
+.hero-title {
+  line-height: 1.15; 
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  color: rgba(255,255,255,0.85); 
+  font-weight: 300; 
+  line-height: 1.6;
 }
 
 /* Caja superpuesta a la derecha */
@@ -47,60 +49,37 @@
   right: 10%;
   width: 380px;
   z-index: 10;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden; 
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2); /* Sombra más profunda para separar del fondo */
-}
-.blue-box {
-  background-color: #3C64C6;
-  color: white;
-  padding: 2.5rem 2.5rem;
-}
-.dark-nav-bar {
-  background-color: #232631; /* Un poco más oscuro para mejor contraste */
-  color: #A0A5B5; /* Texto inactivo ligeramente gris */
-  display: flex;
-}
-.dark-nav-bar div {
-  flex: 1;
-  text-align: center;
-  padding: 1.2rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.dark-nav-bar div:hover {
-  background-color: #1a1c23;
-  color: white;
-}
-.dark-nav-bar div:first-child {
-  border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-/* --- SECCIÓN PROTOCOLOS --- */
+.tracking-widest {
+  letter-spacing: 3px;
+}
+
+/* --- TARJETAS DE PROTOCOLOS --- */
 .protocol-card {
-  border: 1px solid #F0F0F0;
-  background-color: #FFFFFF;
-  transition: all 0.3s ease;
-  border-radius: 16px; /* Bordes más pronunciados y modernos */
-}
-.protocol-card:hover {
-  transform: translateY(-8px); /* Se levanta un poco más al pasar el mouse */
-  box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
-  border-color: rgba(232, 131, 78, 0.4); /* El borde toma el color institucional sutilmente */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Contenedor profesional para los iconos */
+.protocol-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+}
+
+/* Contenedor circular suave para los iconos */
 .icon-wrapper {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  background-color: rgba(232, 131, 78, 0.1); /* Círculo naranja semitransparente */
-  border-radius: 14px;
-  font-size: 1.8rem;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+}
+
+/* Pequeño rebote en el ícono al hacer hover en la tarjeta */
+.protocol-card:hover .icon-wrapper {
+  transform: scale(1.1);
 }

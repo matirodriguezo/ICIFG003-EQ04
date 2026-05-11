@@ -1,37 +1,50 @@
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh">
-  <div class="card shadow-lg border-0 rounded-4" style="width: 100%; max-width: 420px; overflow: hidden;">
-    
-    <div class="bg-primary" style="height: 6px;"></div>
-    
+<div class="login-wrapper d-flex justify-content-center align-items-center">
+  
+  <div class="card shadow-lg border-0 rounded-4 custom-login-card" style="width: 100%; max-width: 420px;">
     <div class="card-body p-5">
+      
       <div class="text-center mb-4">
-        <h2 class="fw-bold text-dark mb-1">Colegio Marcela Paz</h2>
+        <div class="icon-circle bg-primary-subtle text-primary mx-auto mb-3">
+          <i class="bi bi-shield-lock-fill display-5"></i>
+        </div>
+        <h3 class="fw-bold text-dark mb-1">Colegio Marcela Paz</h3>
         <p class="text-muted small">Plataforma Integrada de Inspectoría</p>
       </div>
 
-      <div *ngIf="mensajeError" class="alert alert-danger py-2 mb-4 text-center small rounded-3 border-0 bg-danger text-white" role="alert">
-        <i class="bi bi-exclamation-circle me-1"></i> {{ mensajeError }}
+      <div *ngIf="mensajeError" class="alert alert-danger py-2 mb-4 text-center small rounded-3 border-0 shadow-sm custom-alert" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-1"></i> {{ mensajeError }}
       </div>
 
       <form>
         <div class="mb-3">
           <label class="form-label text-muted small fw-bold">Correo Institucional</label>
-          <input type="email" class="form-control form-control-lg bg-light" name="correo" [(ngModel)]="correo" placeholder="inspector@colegio.cl" />
+          <div class="input-group shadow-sm">
+            <span class="input-group-text bg-light border-0 text-muted px-3"><i class="bi bi-envelope-fill"></i></span>
+            <input type="email" class="form-control form-control-lg bg-light border-0 custom-input fs-6" 
+                   name="correo" [(ngModel)]="correo" placeholder="inspector@colegio.cl" autocomplete="email" />
+          </div>
         </div>
 
         <div class="mb-4">
-          <label class="form-label text-muted small fw-bold">Contraseña</label>
-          <input type="password" class="form-control form-control-lg bg-light" name="contrasena" [(ngModel)]="contrasena" placeholder="••••••••" />
+          <label class="form-label text-muted small fw-bold">Contraseña de Acceso</label>
+          <div class="input-group shadow-sm">
+            <span class="input-group-text bg-light border-0 text-muted px-3"><i class="bi bi-key-fill"></i></span>
+            <input type="password" class="form-control form-control-lg bg-light border-0 custom-input fs-6" 
+                   name="contrasena" [(ngModel)]="contrasena" placeholder="••••••••" autocomplete="current-password" />
+          </div>
         </div>
 
-        <button type="button" class="btn btn-primary btn-lg w-100 mb-3 shadow-sm" (click)="iniciarSesion()">
-          Ingresar al Sistema
+        <button type="button" class="btn btn-primary btn-lg w-100 mb-4 shadow-sm btn-hover-scale fw-bold" (click)="iniciarSesion()">
+          Ingresar al Sistema <i class="bi bi-box-arrow-in-right ms-1"></i>
         </button>
         
-        <a routerLink="/" class="text-decoration-none text-muted small d-block text-center">
-          &larr; Volver a la Landing Page
-        </a>
+        <div class="text-center border-top pt-3">
+          <a routerLink="/" class="text-decoration-none text-secondary small back-link transition-all">
+            <i class="bi bi-arrow-left-short"></i> Volver a la Landing Page
+          </a>
+        </div>
       </form>
+      
     </div>
   </div>
 </div>

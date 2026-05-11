@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth';
   standalone: true,
   imports: [RouterLink, FormsModule, CommonModule], 
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrl: './login.css' // <-- Ya estaba correcto, asegúrate de mantenerlo
 })
 export class LoginComponent {
   

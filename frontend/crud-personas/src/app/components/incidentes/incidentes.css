@@ -1,0 +1,77 @@
+/* Transiciones suaves para las tarjetas */
+.custom-card, .custom-card-table {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+}
+
+/* Ajuste de esquinas para Input Groups con íconos */
+.input-group-text {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.custom-input {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Foco brillante en los inputs */
+.custom-input:focus {
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.15) !important; /* Resplandor rojo/danger */
+}
+
+/* Escala del botón principal */
+.btn-hover-scale {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-hover-scale:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(220, 53, 69, 0.2) !important;
+}
+
+/* Hover de fila en la tabla */
+.table-row-hover {
+  transition: background-color 0.2s ease;
+}
+
+.table-row-hover:hover {
+  background-color: #fcfcfc !important; 
+}
+
+/* Botones circulares de acción en la tabla */
+.action-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #f1f5f9;
+  transform: translateY(-2px);
+}
+
+/* Scrollbar estilizado */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c1c1c1; 
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; 
+}

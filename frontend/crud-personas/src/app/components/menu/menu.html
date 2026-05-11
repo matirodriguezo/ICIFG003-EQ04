@@ -1,47 +1,69 @@
-<nav class="navbar navbar-dark bg-dark px-4 shadow-sm mb-5 border-bottom border-3 border-primary">
-  <span class="navbar-brand fw-bold tracking-wide">Inspectoría Central</span>
-  <button class="btn btn-danger btn-sm px-3 rounded-pill shadow-sm" routerLink="/login">Cerrar Sesión</button>
+<nav class="navbar navbar-dark bg-dark px-4 shadow-sm mb-5 border-bottom border-3 border-secondary">
+  <span class="navbar-brand fw-bold tracking-wide">
+    <i class="bi bi-building me-2 text-light"></i> Colegio Marcela Paz - Inspectoría Central
+  </span>
+  <button class="btn btn-outline-light btn-sm px-4 rounded-pill transition-all" routerLink="/login">
+    <i class="bi bi-box-arrow-right me-1"></i> Cerrar Sesión
+  </button>
 </nav>
 
 <div class="container pb-5">
   <div class="row mb-5 justify-content-center">
     <div class="col-md-8 text-center">
-      <h2 class="fw-bold text-dark">Panel de Control</h2>
-      <p class="text-muted">Seleccione el módulo de trabajo que desea operar.</p>
+      <h2 class="fw-bold text-dark mb-2">Panel de Control Operativo</h2>
+      <p class="text-muted">Seleccione el módulo de trabajo correspondiente a su labor.</p>
     </div>
   </div>
 
   <div class="row g-4 justify-content-center">
     
     <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 rounded-4 p-2 card-hover">
-        <div class="card-body text-center">
-          <div class="display-3 mb-3 text-primary">👨‍🎓</div>
-          <h5 class="fw-bold text-dark">Gestión de Alumnos</h5>
-          <p class="text-muted small mb-4">Administración de la base de datos de estudiantes y matrículas.</p>
-          <button routerLink="/personas" class="btn btn-primary w-100 shadow-sm">Abrir Módulo</button>
+      <div class="card h-100 shadow-sm border-0 rounded-4 border-top border-4 border-primary custom-card">
+        <div class="card-body p-4 text-center d-flex flex-column">
+          <div class="icon-wrapper bg-primary-subtle text-primary mb-3 mx-auto">
+            <i class="bi bi-people-fill"></i>
+          </div>
+          <h5 class="fw-bold text-dark mb-3">Directorio Estudiantil</h5>
+          <p class="text-muted small mb-4 flex-grow-1">
+            Administración completa de la base de datos de alumnos regulares, matrículas y actualización de niveles.
+          </p>
+          <button routerLink="/personas" class="btn btn-outline-primary w-100 rounded-pill fw-bold btn-custom">
+            Acceder al Directorio
+          </button>
         </div>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 rounded-4 p-2 card-hover">
-        <div class="card-body text-center">
-          <div class="display-3 mb-3 text-secondary">📋</div>
-          <h5 class="fw-bold text-dark">Catálogo Normativo</h5>
-          <p class="text-muted small mb-4">Mantenimiento y actualización de los protocolos oficiales.</p>
-          <button routerLink="/protocolos" class="btn btn-dark w-100 shadow-sm">Abrir Módulo</button>
+      <div class="card h-100 shadow-sm border-0 rounded-4 border-top border-4 border-dark custom-card">
+        <div class="card-body p-4 text-center d-flex flex-column">
+          <div class="icon-wrapper bg-secondary-subtle text-dark mb-3 mx-auto">
+            <i class="bi bi-journal-bookmark-fill"></i>
+          </div>
+          <h5 class="fw-bold text-dark mb-3">Catálogo Normativo</h5>
+          <p class="text-muted small mb-4 flex-grow-1">
+            Revisión y mantenimiento de los protocolos oficiales vigentes e instrumentos de convivencia escolar.
+          </p>
+          <button routerLink="/protocolos" class="btn btn-outline-dark w-100 rounded-pill fw-bold btn-custom">
+            Consultar Normativa
+          </button>
         </div>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 rounded-4 p-2 card-hover">
-        <div class="card-body text-center">
-          <div class="display-3 mb-3 text-danger">🚨</div>
-          <h5 class="fw-bold text-dark">Registro de Casos</h5>
-          <p class="text-muted small mb-4">Módulo de cruce para registrar incidentes y activar protocolos.</p>
-          <button routerLink="/incidentes" class="btn btn-danger w-100 shadow-sm">Abrir Módulo</button>
+      <div class="card h-100 shadow-sm border-0 rounded-4 border-top border-4 border-danger custom-card">
+        <div class="card-body p-4 text-center d-flex flex-column">
+          <div class="icon-wrapper bg-danger-subtle text-danger mb-3 mx-auto">
+            <i class="bi bi-shield-exclamation"></i>
+          </div>
+          <h5 class="fw-bold text-dark mb-3">Auditoría de Incidentes</h5>
+          <p class="text-muted small mb-4 flex-grow-1">
+            Módulo de cruce operativo. Permite registrar nuevos incidentes, activar protocolos y gestionar el historial.
+          </p>
+          <button routerLink="/incidentes" class="btn btn-outline-danger w-100 rounded-pill fw-bold btn-custom">
+            Gestionar Casos
+          </button>
         </div>
       </div>
     </div>

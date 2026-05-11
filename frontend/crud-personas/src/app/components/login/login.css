@@ -1,0 +1,76 @@
+/* Fondo de pantalla completa con degradado elegante */
+.login-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+  padding: 1rem;
+}
+
+/* Tarjeta principal con borde superior corporativo */
+.custom-login-card {
+  border-top: 6px solid #0d6efd !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-login-card:hover {
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.1) !important;
+}
+
+/* Círculo para el logo/escudo */
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilos de los Input Groups */
+.input-group-text {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.custom-input {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Foco brillante en los inputs */
+.custom-input:focus {
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15) !important;
+}
+
+/* Animación del botón principal */
+.btn-hover-scale {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-hover-scale:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(13, 110, 253, 0.25) !important;
+}
+
+/* Link de volver */
+.back-link:hover {
+  color: #0d6efd !important;
+  text-decoration: underline !important;
+}
+
+/* Animación de entrada para el mensaje de error */
+.custom-alert {
+  animation: fadeInDown 0.3s ease-out forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

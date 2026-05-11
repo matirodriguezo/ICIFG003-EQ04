@@ -1,0 +1,46 @@
+/* Animación y relieve de la tarjeta */
+.custom-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+}
+
+/* Hover sutil y limpio en las filas de la tabla */
+.table-row-hover {
+  transition: background-color 0.2s ease;
+}
+
+.table-row-hover:hover {
+  background-color: #f8f9fa !important;
+}
+
+/* Transición para el botón de estado (Vigente/Inactivo) */
+.status-btn {
+  transition: all 0.2s ease-in-out;
+  letter-spacing: 0.5px;
+}
+
+.status-btn:hover {
+  transform: scale(1.03);
+}
+
+/* Estilización del Scrollbar para que no se vea el nativo grueso de Windows/Chrome */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c1c1c1; 
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; 
+}

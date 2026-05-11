@@ -15,17 +15,18 @@ import { Protocolo } from '../../models/protocolo';
   selector: 'app-incidentes',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './incidentes.html'
+  templateUrl: './incidentes.html',
+  styleUrl: './incidentes.css' // <-- LÍNEA AÑADIDA (Con su coma en la línea anterior)
 })
 export class IncidentesComponent implements OnInit {
+  // ... (Conserva todo el resto de tu código TypeScript intacto tal cual me lo enviaste)
   
   incidentes: Incidente[] = [];
   alumnos: Persona[] = [];
   protocolosActivos: Protocolo[] = [];
   
-  nuevoIncidente: Incidente = { id: 0, alumnoId: 0, protocoloId: 0, fecha: '', descripcionEvento: '', responsable: '' };
-  
-  // Variable para el buscador dinámico
+  // Objeto base
+  nuevoIncidente: Incidente = { id: 0, alumnoId: 0, protocoloId: 0, fecha: '', descripcionEvento: '', responsable: '', estado: 'VIGENTE', motivoModificacion: '' };
   textoBusqueda: string = '';
 
   constructor(
@@ -40,7 +41,6 @@ export class IncidentesComponent implements OnInit {
     this.establecerFechaHoy();
   }
 
-  // Establece la fecha del día actual por defecto
   establecerFechaHoy() {
     const hoy = new Date();
     const yyyy = hoy.getFullYear();
@@ -50,68 +50,113 @@ export class IncidentesComponent implements OnInit {
   }
 
   cargarDatosMaestros() {
-    // Usamos getPersonasHttp para conectar con tu servicio de alumnos
     this.personaService.getPersonasHttp().subscribe((data: Persona[]) => {
       this.alumnos = data;
     });
-
     this.protocoloService.getProtocolos().subscribe((data: Protocolo[]) => {
-      // Solo mostramos los protocolos que están habilitados
       this.protocolosActivos = data.filter(p => p.activo === true);
     });
-
     this.cargarIncidentes();
   }
 
   cargarIncidentes() {
     this.incidenteService.getIncidentes().subscribe(data => {
-      this.incidentes = data;
+      // Orden: Primero los vigentes más recientes
+      this.incidentes = data.sort((a, b) => (a.estado === 'VIGENTE' ? -1 : 1));
       this.cdr.detectChanges();
     });
   }
 
-  // Filtro en tiempo real por RUT, Nombre, Apellido o CURSO
   get alumnosFiltrados(): Persona[] {
-    if (!this.textoBusqueda) {
-      return this.alumnos;
-    }
-    const busqueda = this.textoBusqueda.toLowerCase();
+    if (!this.textoBusqueda) return this.alumnos;
+    const b = this.textoBusqueda.toLowerCase();
     return this.alumnos.filter(a => 
-      a.nombre.toLowerCase().includes(busqueda) || 
-      a.apellido.toLowerCase().includes(busqueda) || 
-      a.rut.toLowerCase().includes(busqueda) ||
-      (a.curso && a.curso.toLowerCase().includes(busqueda))
+      a.nombre.toLowerCase().includes(b) || a.apellido.toLowerCase().includes(b) || a.rut.toLowerCase().includes(b)
     );
   }
 
+  // FUNCION UNIFICADA: CREAR O EDITAR CON BITÁCORA
   guardarIncidente() {
     if (this.nuevoIncidente.alumnoId === 0 || this.nuevoIncidente.protocoloId === 0) {
-      alert("Error: Debe seleccionar un alumno y un protocolo para continuar.");
+      alert("Error: Selección de alumno y protocolo requerida.");
       return;
     }
 
-    // Notificación de confirmación de acción (Requerimiento de control de usuario)
-    if (confirm("¿Está seguro de registrar este incidente? Se activará el protocolo y quedará constancia oficial en el sistema.")) {
-      this.incidenteService.crearIncidente(this.nuevoIncidente).subscribe(() => {
-        alert("¡Éxito! El incidente ha sido registrado y el protocolo fue activado correctamente.");
-        this.cargarIncidentes();
+    const esEdicion = this.nuevoIncidente.id !== 0;
+    const confirmacion = confirm(esEdicion ? "¿Desea guardar los cambios en este registro?" : "¿Desea registrar este nuevo incidente?");
+
+    if (confirmacion) {
+      if (esEdicion) {
+        // Lógica de Bitácora para edición
+        const motivo = prompt("SISTEMA DE AUDITORÍA\n\nIngrese brevemente el motivo de la edición:");
+        const fechaHora = new Date().toLocaleString();
+        const nuevoRegistro = `[${fechaHora}] Editado: ${motivo || 'Corrección general de datos'}`;
         
-        // Reinicio de formulario manteniendo la fecha de hoy
-        this.nuevoIncidente = { id: 0, alumnoId: 0, protocoloId: 0, fecha: '', descripcionEvento: '', responsable: '' };
-        this.textoBusqueda = '';
-        this.establecerFechaHoy();
-      });
+        // Sumamos el historial nuevo debajo del antiguo
+        this.nuevoIncidente.motivoModificacion = this.nuevoIncidente.motivoModificacion 
+          ? this.nuevoIncidente.motivoModificacion + '\n' + nuevoRegistro 
+          : nuevoRegistro;
+        
+        this.incidenteService.actualizarIncidente(this.nuevoIncidente.id, this.nuevoIncidente).subscribe(() => {
+          alert("Registro actualizado con éxito.");
+          this.finalizarAccion();
+        });
+      } else {
+        this.incidenteService.crearIncidente(this.nuevoIncidente).subscribe(() => {
+          alert("Incidente registrado y protocolo activado.");
+          this.finalizarAccion();
+        });
+      }
     }
   }
 
-  // Formatea el nombre para mostrar el curso claramente
+  // BOTÓN EDITAR: Carga los datos en el formulario
+  cargarParaEditar(inc: Incidente) {
+    this.nuevoIncidente = { ...inc };
+    window.scrollTo(0, 0); // Sube la pantalla para ver el formulario
+  }
+
+  // BOTÓN ANULAR: Borrado lógico con bitácora acumulativa
+  anularIncidente(inc: Incidente) {
+    const motivo = prompt("SISTEMA DE AUDITORÍA\n\nIndique el motivo de la anulación del caso. Este registro NO se borrará, pero quedará marcado como inválido en el historial:");
+    
+    if (motivo && motivo.trim() !== "") {
+      inc.estado = "ANULADO";
+      
+      const fechaHora = new Date().toLocaleString();
+      const nuevoRegistro = `[${fechaHora}] ANULADO: ${motivo.trim()}`;
+      
+      inc.motivoModificacion = inc.motivoModificacion 
+        ? inc.motivoModificacion + '\n' + nuevoRegistro 
+        : nuevoRegistro;
+
+      this.incidenteService.actualizarIncidente(inc.id, inc).subscribe(() => {
+        alert("El incidente ha sido anulado de forma transparente.");
+        this.cargarIncidentes();
+      });
+    } else if (motivo === "") {
+      alert("Operación denegada: Debe ingresar un motivo para anular.");
+    }
+  }
+
+  finalizarAccion() {
+    this.cargarIncidentes();
+    this.limpiar();
+    this.establecerFechaHoy();
+  }
+
+  limpiar() {
+    this.nuevoIncidente = { id: 0, alumnoId: 0, protocoloId: 0, fecha: '', descripcionEvento: '', responsable: '', estado: 'VIGENTE', motivoModificacion: '' };
+    this.textoBusqueda = '';
+  }
+
   getNombreAlumno(id: number): string {
     const alumno = this.alumnos.find(a => a.id == id);
-    return alumno ? `[${alumno.curso}] ${alumno.nombre} ${alumno.apellido}` : 'Desconocido';
+    return alumno ? `[${alumno.curso}] ${alumno.nombre} ${alumno.apellido}` : '⚠️ Alumno no encontrado';
   }
 
   getNombreProtocolo(id: number): string {
     const protocolo = this.protocolosActivos.find(p => p.id == id);
-    return protocolo ? protocolo.nombreProtocolo : 'Protocolo no vigente';
+    return protocolo ? protocolo.nombreProtocolo : 'Protocolo Aplicado';
   }
 }

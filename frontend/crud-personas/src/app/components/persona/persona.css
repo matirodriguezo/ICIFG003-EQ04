@@ -1,0 +1,68 @@
+/* Animación y borde de la tarjeta del formulario */
+.custom-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid #0d6efd; /* Azul corporativo */
+}
+
+.custom-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+}
+
+/* Tarjeta de la tabla (borde gris/plata) */
+.custom-card-table {
+  border-top: 4px solid #adb5bd;
+}
+
+/* Ajuste de esquinas para los Input Groups de Bootstrap */
+.input-group-text {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.custom-input {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efecto de foco: de gris a blanco brillante */
+.custom-input:focus {
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15) !important;
+}
+
+/* Escala del botón principal al hacer hover */
+.btn-hover-scale {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-hover-scale:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(13, 110, 253, 0.2) !important;
+}
+
+/* Botones de acción circulares en la tabla */
+.action-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+}
+
+/* Hover sutil en las filas de la tabla */
+.table-row-hover {
+  transition: background-color 0.2s ease;
+}
+
+.table-row-hover:hover {
+  background-color: #f1f5f9 !important; /* Azul/gris muy claro */
+}
