@@ -1,17 +1,33 @@
 <div class="login-wrapper d-flex justify-content-center align-items-center">
-  
-  <div class="card shadow-lg border-0 rounded-4 custom-login-card" style="width: 100%; max-width: 420px;">
+  <div
+    class="card shadow-lg border-0 rounded-4 custom-login-card"
+    style="width: 100%; max-width: 420px"
+  >
     <div class="card-body p-5">
-      
       <div class="text-center mb-4">
-        <div class="icon-circle bg-primary-subtle text-primary mx-auto mb-3">
-          <i class="bi bi-shield-lock-fill display-5"></i>
+        <div class="icon-circle bg-alert-subtle text-primary mx-auto mb-3">
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <img
+              src="assets/logo.png"
+              alt="Logo Colegio"
+              width="130"
+              height="150"
+              class="me-3"
+              style="object-fit: contain"
+            />
+          </a>
         </div>
-        <h3 class="fw-bold text-dark mb-1">Colegio Marcela Paz</h3>
+        <br>
+        
+        <h3 class="fw-bold text-dark mb-1 mt-3">Colegio Marcela Paz</h3>
         <p class="text-muted small">Plataforma Integrada de Inspectoría</p>
       </div>
 
-      <div *ngIf="mensajeError" class="alert alert-danger py-2 mb-4 text-center small rounded-3 border-0 shadow-sm custom-alert" role="alert">
+      <div
+        *ngIf="mensajeError"
+        class="alert alert-danger py-2 mb-4 text-center small rounded-3 border-0 shadow-sm custom-alert"
+        role="alert"
+      >
         <i class="bi bi-exclamation-triangle-fill me-1"></i> {{ mensajeError }}
       </div>
 
@@ -19,32 +35,54 @@
         <div class="mb-3">
           <label class="form-label text-muted small fw-bold">Correo Institucional</label>
           <div class="input-group shadow-sm">
-            <span class="input-group-text bg-light border-0 text-muted px-3"><i class="bi bi-envelope-fill"></i></span>
-            <input type="email" class="form-control form-control-lg bg-light border-0 custom-input fs-6" 
-                   name="correo" [(ngModel)]="correo" placeholder="inspector@colegio.cl" autocomplete="email" />
+            <span class="input-group-text bg-light border-0 text-muted px-3"
+              ><i class="bi bi-envelope-fill"></i
+            ></span>
+            <input
+              type="email"
+              class="form-control form-control-lg bg-light border-0 custom-input fs-6"
+              name="correo"
+              [(ngModel)]="correo"
+              placeholder="inspector@colegio.cl"
+              autocomplete="email"
+            />
           </div>
         </div>
 
         <div class="mb-4">
           <label class="form-label text-muted small fw-bold">Contraseña de Acceso</label>
           <div class="input-group shadow-sm">
-            <span class="input-group-text bg-light border-0 text-muted px-3"><i class="bi bi-key-fill"></i></span>
-            <input type="password" class="form-control form-control-lg bg-light border-0 custom-input fs-6" 
-                   name="contrasena" [(ngModel)]="contrasena" placeholder="••••••••" autocomplete="current-password" />
+            <span class="input-group-text bg-light border-0 text-muted px-3"
+              ><i class="bi bi-key-fill"></i
+            ></span>
+            <input
+              type="password"
+              class="form-control form-control-lg bg-light border-0 custom-input fs-6"
+              name="contrasena"
+              [(ngModel)]="contrasena"
+              placeholder="••••••••"
+              autocomplete="current-password"
+            />
           </div>
         </div>
 
-        <button type="button" class="btn btn-primary btn-lg w-100 mb-4 shadow-sm btn-hover-scale fw-bold" (click)="iniciarSesion()">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg w-100 mb-4 shadow-sm btn-hover-scale fw-bold"
+          (click)="iniciarSesion()"
+        >
           Ingresar al Sistema <i class="bi bi-box-arrow-in-right ms-1"></i>
         </button>
-        
+
         <div class="text-center border-top pt-3">
-          <a routerLink="/" class="text-decoration-none text-secondary small back-link transition-all">
+          <a
+            routerLink="/"
+            class="text-decoration-none text-secondary small back-link transition-all"
+          >
             <i class="bi bi-arrow-left-short"></i> Volver a la Landing Page
           </a>
         </div>
       </form>
-      
     </div>
   </div>
 </div>

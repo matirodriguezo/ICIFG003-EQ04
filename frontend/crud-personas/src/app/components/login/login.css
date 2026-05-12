@@ -3,12 +3,35 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
   padding: 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Tarjeta principal con borde superior corporativo */
 .custom-login-card {
   border-top: 6px solid #0d6efd !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Asegura que la tarjeta esté por encima de la imagen de fondo tenue */
+.custom-login-card {
+  position: relative;
+  z-index: 2;
+}
+
+/* Imagen de fondo tenue (debajo de todo el contenido) */
+.login-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.cooperativa.cl/noticias/site/artic/20180706/imag/foto_0000001120180706160625.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.08; /* ajustar para más o menos tenue */
+  filter: contrast(0.9) saturate(0.6) blur(0px);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .custom-login-card:hover {

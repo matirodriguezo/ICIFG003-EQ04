@@ -44,3 +44,12 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8; 
 }
+
+/* Estilos del modal simple */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1050;
+}
+.modal-card { z-index: 1060; }

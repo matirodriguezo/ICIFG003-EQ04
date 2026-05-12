@@ -14,6 +14,9 @@ import { Protocolo } from '../../models/protocolo';
 })
 export class ProtocolosComponent implements OnInit {
   protocolos: Protocolo[] = [];
+  selectedProtocolo: Protocolo | null = null;
+  isEditMode = false;
+  showModal = false;
 
   constructor(private protocoloService: ProtocoloService, private cdr: ChangeDetectorRef) {}
 
@@ -26,6 +29,60 @@ export class ProtocolosComponent implements OnInit {
       this.protocolos = data;
       this.cdr.detectChanges();
     });
+  }
+
+  abrirCrear() {
+    this.selectedProtocolo = { id: 0, nombreProtocolo: '', descripcion: '', activo: true };
+    this.isEditMode = false;
+    this.showModal = true;
+  }
+
+  abrirEditar(p: Protocolo) {
+    // clonamos para no mutar la lista hasta confirmar
+    this.selectedProtocolo = { ...p };
+    this.isEditMode = true;
+    this.showModal = true;
+  }
+
+  verProtocolo(p: Protocolo) {
+    this.selectedProtocolo = { ...p };
+    this.isEditMode = false;
+    this.showModal = false;
+  }
+
+  cancelarModal() {
+    this.selectedProtocolo = null;
+    this.showModal = false;
+  }
+
+  guardarProtocolo() {
+    if (!this.selectedProtocolo) return;
+
+    if (this.isEditMode) {
+      this.protocoloService.actualizarProtocolo(this.selectedProtocolo.id, this.selectedProtocolo).subscribe(() => {
+        alert('Protocolo actualizado.');
+        this.cargarProtocolos();
+        this.cancelarModal();
+      });
+    } else {
+      // crear
+      const payload = { ...this.selectedProtocolo };
+      // backend suele ignorar id en POST
+      this.protocoloService.crearProtocolo(payload).subscribe(() => {
+        alert('Protocolo creado.');
+        this.cargarProtocolos();
+        this.cancelarModal();
+      });
+    }
+  }
+
+  eliminarProtocolo(id: number) {
+    if (confirm('¿Confirma eliminar este protocolo? Esta acción no se puede deshacer.')) {
+      this.protocoloService.eliminarProtocolo(id).subscribe(() => {
+        alert('Protocolo eliminado.');
+        this.cargarProtocolos();
+      });
+    }
   }
 
   cambiarEstado(p: Protocolo) {

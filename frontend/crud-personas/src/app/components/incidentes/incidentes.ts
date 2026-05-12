@@ -24,6 +24,9 @@ export class IncidentesComponent implements OnInit {
   incidentes: Incidente[] = [];
   alumnos: Persona[] = [];
   protocolosActivos: Protocolo[] = [];
+  // filtros
+  textoFiltroIncidentes: string = '';
+  filtroProtocoloId: number = 0;
   
   // Objeto base
   nuevoIncidente: Incidente = { id: 0, alumnoId: 0, protocoloId: 0, fecha: '', descripcionEvento: '', responsable: '', estado: 'VIGENTE', motivoModificacion: '' };
@@ -158,5 +161,22 @@ export class IncidentesComponent implements OnInit {
   getNombreProtocolo(id: number): string {
     const protocolo = this.protocolosActivos.find(p => p.id == id);
     return protocolo ? protocolo.nombreProtocolo : 'Protocolo Aplicado';
+  }
+
+  get incidentesFiltrados(): Incidente[] {
+    const texto = this.textoFiltroIncidentes ? this.textoFiltroIncidentes.toLowerCase() : '';
+    return this.incidentes.filter(inc => {
+      // filtro por protocolo si está seleccionado
+      if (this.filtroProtocoloId && inc.protocoloId !== this.filtroProtocoloId) return false;
+
+      if (!texto) return true;
+
+      // buscar por nombre de alumno, descripción o nombre del protocolo
+      const nombreAlumno = this.getNombreAlumno(inc.alumnoId).toLowerCase();
+      const descripcion = (inc.descripcionEvento || '').toLowerCase();
+      const nombreProtocolo = this.getNombreProtocolo(inc.protocoloId).toLowerCase();
+
+      return nombreAlumno.includes(texto) || descripcion.includes(texto) || nombreProtocolo.includes(texto);
+    });
   }
 }
