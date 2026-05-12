@@ -27,6 +27,7 @@ export class IncidentesComponent implements OnInit {
   // filtros
   textoFiltroIncidentes: string = '';
   filtroProtocoloId: number = 0;
+  filtroFecha: string = '';
   
   // Objeto base
   nuevoIncidente: Incidente = { id: 0, alumnoId: 0, protocoloId: 0, fecha: '', descripcionEvento: '', responsable: '', estado: 'VIGENTE', motivoModificacion: '' };
@@ -168,6 +169,9 @@ export class IncidentesComponent implements OnInit {
     return this.incidentes.filter(inc => {
       // filtro por protocolo si está seleccionado
       if (this.filtroProtocoloId && inc.protocoloId !== this.filtroProtocoloId) return false;
+
+      // filtro por fecha exacta si se seleccionó
+      if (this.filtroFecha && inc.fecha !== this.filtroFecha) return false;
 
       if (!texto) return true;
 
