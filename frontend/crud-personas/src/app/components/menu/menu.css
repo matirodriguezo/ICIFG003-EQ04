@@ -33,3 +33,27 @@
   transition: all 0.2s ease-in-out;
   letter-spacing: 0.5px;
 }
+
+/* Fondo tenue del colegio para la pantalla de menú */
+.menu-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.menu-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.cooperativa.cl/noticias/site/artic/20180706/imag/foto_0000001120180706160625.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.06; /* ajustar según preferencia */
+  filter: contrast(0.9) saturate(0.6) blur(0px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Asegurar que la barra de navegación y las tarjetas queden por encima */
+.navbar, .custom-card { position: relative; z-index: 2; }

@@ -93,11 +93,11 @@
     <div *ngIf="selectedProtocolo">
       <div class="mb-3">
         <label class="form-label small fw-bold">Nombre</label>
-        <input [(ngModel)]="selectedProtocolo.nombreProtocolo" [readonly]="!isEditMode && selectedProtocolo?.id" class="form-control" />
+        <input [(ngModel)]="selectedProtocolo.nombreProtocolo" [readonly]="!isEditMode && selectedProtocolo.id" class="form-control" />
       </div>
       <div class="mb-3">
         <label class="form-label small fw-bold">Descripción</label>
-        <textarea [(ngModel)]="selectedProtocolo.descripcion" [readonly]="!isEditMode && selectedProtocolo?.id" class="form-control" rows="4"></textarea>
+        <textarea [(ngModel)]="selectedProtocolo.descripcion" [readonly]="!isEditMode && selectedProtocolo.id" class="form-control" rows="4"></textarea>
       </div>
       <div class="mb-3 form-check">
         <input class="form-check-input" type="checkbox" id="activoCheck" [(ngModel)]="selectedProtocolo.activo" [disabled]="!isEditMode" />
@@ -106,7 +106,7 @@
 
       <div class="d-flex justify-content-end">
         <button *ngIf="isEditMode" class="btn btn-primary me-2" (click)="guardarProtocolo()">Guardar</button>
-        <button *ngIf="!isEditMode && !selectedProtocolo?.id" class="btn btn-primary me-2" (click)="guardarProtocolo()">Crear</button>
+        <button *ngIf="!isEditMode && !selectedProtocolo.id" class="btn btn-primary me-2" (click)="guardarProtocolo()">Crear</button>
         <button class="btn btn-outline-secondary" (click)="cancelarModal()">Cerrar</button>
       </div>
     </div>
