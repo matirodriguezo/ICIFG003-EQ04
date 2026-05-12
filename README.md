@@ -1,10 +1,10 @@
-# 🏫 Plataforma Integrada de Inspectoría - Colegio Marcela Paz
+#  Plataforma Integrada de Inspectoría - Colegio Marcela Paz
 
 Sistema web integral desarrollado para la gestión de alumnos, catálogo normativo y auditoría de convivencia escolar (incidentes) del Colegio Marcela Paz, sede Concepción. El proyecto presenta una arquitectura cliente-servidor lista para ejecución en entornos locales.
 
 ---
 
-## 🛠️ Stack Tecnológico
+##  Stack Tecnológico
 
 ### Frontend (Cliente)
 * **Framework:** Angular 17+ (Arquitectura basada en Standalone Components).
@@ -23,10 +23,10 @@ Sistema web integral desarrollado para la gestión de alumnos, catálogo normati
 
 ---
 
-## 🚀 Características Principales (Módulos)
+##  Características Principales (Módulos)
 
 1. **Landing Page & Autenticación:** * Portal público de presentación institucional.
-   * Interfaz de Login interactiva para funcionarios.
+   * Interfaz de Login interactiva con credenciales centralizadas.
 2. **Directorio Estudiantil (CRUD Alumnos):** * Gestión completa de estudiantes.
    * Manejo compuesto de cursos (Nivel + Letra).
 3. **Catálogo Normativo (Protocolos):** * Listado de instrumentos de convivencia escolar.
@@ -37,7 +37,7 @@ Sistema web integral desarrollado para la gestión de alumnos, catálogo normati
 
 ---
 
-## ⚙️ Requisitos Previos
+##  Requisitos Previos
 
 Asegúrate de tener instalado en tu entorno local:
 * **Node.js** (v18 o superior) y npm.
@@ -48,7 +48,7 @@ Asegúrate de tener instalado en tu entorno local:
 
 ---
 
-## 🔧 Instalación y Ejecución Local
+##  Instalación y Ejecución Local
 
 ### Paso 1: Configuración de la Base de Datos
 1. Abre pgAdmin o la terminal de comandos de PostgreSQL (psql).
@@ -84,7 +84,50 @@ Asegúrate de tener instalado en tu entorno local:
 
 ---
 
-## 📂 Estructura del Proyecto Frontend
+##  Credenciales de Acceso
+
+El sistema está protegido. Para ingresar a los módulos de administración, debes utilizar la siguiente cuenta exclusiva:
+* **Correo Institucional:** `admin@colegio.cl`
+* **Contraseña:** `admin123`
+
+---
+
+##  Ejemplo de Flujo de Uso
+
+Para comprobar el correcto funcionamiento de las relaciones del sistema, puedes seguir este flujo de prueba paso a paso:
+
+1. **Ingreso a la Plataforma:**
+   * Accede a la *Landing Page* institucional (`http://localhost:4200/`).
+   * Haz clic en **"Iniciar Sesión"**.
+   * Ingresa las **únicas credenciales válidas** (`admin@colegio.cl` / `admin123`) y presiona "Ingresar al Sistema". Serás redirigido al Panel de Control.
+
+2. **Registro de Alumno Base:**
+   * En el Panel de Control, ingresa al módulo **"Gestión de Alumnos"**.
+   * Completa el formulario de la izquierda con datos ficticios (RUT, Nombres, Apellidos) y selecciona un curso (Ej: `2° Medio` y letra `B`).
+   * Presiona **"Registrar en Sistema"**. Verifica que el estudiante aparezca correctamente en la tabla de la derecha con su curso concatenado.
+   * Presiona "Volver al Menú".
+
+3. **Verificación de Normativa:**
+   * Ingresa al módulo **"Catálogo Normativo"**.
+   * Verifica que exista al menos un protocolo habilitado (en verde). Si no hay ninguno, créalo usando el botón "Nuevo" (Ej: *Protocolo de Agresión Física*).
+   * Vuelve al menú principal.
+
+4. **Registro de Incidente (Cruce de Datos):**
+   * Ingresa al módulo **"Registro de Casos"**.
+   * En el formulario, despliega la lista "Identificar Alumno"; selecciona al estudiante que creaste en el paso 2.
+   * Selecciona el protocolo verificado en el paso 3.
+   * Asigna una fecha, un responsable y escribe una descripción objetiva del hecho.
+   * Presiona **"Registrar Acta Oficial"**.
+
+5. **Auditoría y Bitácora (Soft Delete):**
+   * Ubica el incidente recién creado en la tabla de *Historial de Convivencia Escolar* (a la derecha).
+   * Haz clic en el botón amarillo (Editar). El sistema te pedirá justificar la modificación. Ingresa: *"Se agregan más detalles al relato"*. Verifica cómo esto se añade a la bitácora visible del registro.
+   * Finalmente, haz clic en el botón rojo (Anular). El sistema te obligará a ingresar un motivo. Escribe: *"Error de tipificación"*. 
+   * Observa cómo el registro no desaparece, sino que pasa a estado **ANULADO**, su color se atenúa, los botones de acción se bloquean ("Registro Inalterable") y la justificación queda plasmada permanentemente en la bitácora de auditoría.
+
+---
+
+##  Estructura del Proyecto Frontend
 
 La interfaz gráfica mantiene una estructura modularizada para facilitar el mantenimiento y la escalabilidad del código:
 
